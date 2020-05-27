@@ -1,10 +1,10 @@
 {
   "author": "theGordHoard <izac@gordhoard.org> (https://gordhoard.org)",
-  "name": "hoardbot",
-  "license": "UNLICENSED",
+  "name": "trailmaster",
+  "license": "MIT",
   "version": "1.0.0",
   "main": "src/index.ts",
-  "repository": "https://github.com/thegordhoard/hoardbot",
+  "repository": "https://github.com/thegordhoard/trailmaster",
   "dependencies": {
     "eris": "^0.13.1",
     "ioredis": "^4.17.1",
