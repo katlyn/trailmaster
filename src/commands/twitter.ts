@@ -9,16 +9,29 @@ export const followCommand = async (msg: Message): Promise<void> => {
     await msg.channel.createMessage('This channel has already been subscribed!')
   } else {
     await r.sadd('subscriptions:channels', msg.channel.id)
-    await msg.channel.createMessage('Successfully subscribed this channel to messages.')
+    try {
+      await msg.channel.createMessage('Successfully subscribed this channel to messages.')
+    } catch (err) {
+      const dmChannel = await msg.author.getDMChannel()
+      try {
+        await dmChannel.createMessage(`${msg.channel.mention} has been subscribed, but it looks like I don't have permission to send messages there. Update permissions to allow this or the channel will be automatically unsubscribed.`)
+      } catch (err) {
+        await r.srem('subscriptions:channels', msg.channel.id)
+      }
+    }
   }
 }
 
 export const unfollowCommand = async (msg: Message): Promise<void> => {
   if (await r.sismember('subscriptions:channels', msg.channel.id) === 1) {
     await r.srem('subscriptions:channels', msg.channel.id)
-    await msg.channel.createMessage('Successfully removed this channel\'s subscription.')
+    try {
+      await msg.channel.createMessage('Successfully removed this channel\'s subscription.')
+    } catch (err) {}
   } else {
-    await msg.channel.createMessage('This channel isn\'t subscribed!')
+    try {
+      await msg.channel.createMessage('This channel isn\'t subscribed!')
+    } catch (err) {}
   }
 }
 
