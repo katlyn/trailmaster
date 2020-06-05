@@ -54,7 +54,8 @@ export const init = async (bot: CommandClient): Promise<void> => {
   stream.on('tweet', (tweet: Twitter.Status) => {
     if (
       !followedAccounts.includes(tweet.user.id_str) ||
-      tweet.in_reply_to_status_id !== null
+      tweet.in_reply_to_status_id !== null ||
+      followedAccounts.includes(tweet.retweeted_status?.user.id_str)
     ) {
       return
     }
