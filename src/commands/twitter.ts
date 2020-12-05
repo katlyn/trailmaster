@@ -52,6 +52,7 @@ export const init = async (bot: CommandClient): Promise<void> => {
   })
 
   stream.on('tweet', (tweet: Twitter.Status) => {
+    console.log(`Tweet from ${tweet.user.screen_name}`)
     if (
       !followedAccounts.includes(tweet.user.id_str) ||
       tweet.in_reply_to_status_id !== null ||
