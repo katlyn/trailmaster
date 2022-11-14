@@ -3,7 +3,9 @@ import { CommandClient } from 'eris'
 
 import twitter from './commands/twitter'
 
-const bot = new CommandClient(process.env.TOKEN, {}, {
+const bot = new CommandClient(process.env.TOKEN, {
+  intents: ['guildMessages', 'directMessages']
+}, {
   prefix: process.env.PREFIX.split(','),
   defaultHelpCommand: false
 })
