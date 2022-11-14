@@ -73,9 +73,9 @@ export const init = async (bot: CommandClient): Promise<void> => {
           }))
         }
         await Promise.all(proms)
-        if (failedChannels.length > 0) {
-          await r.srem('subscriptions:channels', ...failedChannels)
-        }
+        // if (failedChannels.length > 0) {
+        //   await r.srem('subscriptions:channels', ...failedChannels)
+        // }
       })
       .catch(err => { console.error(err) })
   })
